@@ -1,20 +1,20 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { decrement, increment } from '../redux/dynamicCounter/dynamicAction';
 
 
 
-function DynamicCounter() {
+function DynamicCounter({ count, decrementHandler, incrementHandler }) {
 
-    const count = useSelector(state => state.dynamicCounter.value);
-    const dispatch = useDispatch();
+    // const count = useSelector(state => state.dynamicCounter.value);
+    // const dispatch = useDispatch();
 
-    const incrementHandler = (value) => {
-        dispatch(increment(value));
-    };
-    const decrementHandler = (value) => {
-        dispatch(decrement(value));
-    };
+    // const incrementHandler = (value) => {
+    //     dispatch(increment(value));
+    // };
+    // const decrementHandler = (value) => {
+    //     dispatch(decrement(value));
+    // };
 
     return (
         <div className="p-4 h-auto flex flex-col items-center justify-center space-y-5 bg-white rounded shadow">
@@ -35,4 +35,18 @@ function DynamicCounter() {
     );
 }
 
-export default DynamicCounter;
+const mapStateToProps = (state) => {
+    return {
+        count:state.dynamicCounter.value
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    
+    return {
+        incrementHandler: (v) => dispatch(increment(v)),
+        decrementHandler:(v)=>dispatch(decrement(v))
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(DynamicCounter);
