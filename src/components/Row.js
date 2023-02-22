@@ -1,19 +1,21 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteBooking } from '../redux/Booking/bookingActions';
+import moment from 'moment';
 
-function Tr({from,to,date,guests,ticketClass,id}) {
-
+function Row({ data: { from, to, date, guests, ticketClass, id } }) {
+    
     const dispatch = useDispatch()
+    const formattedDate = moment(date).format('MM-DD-YY')
+
     
     const deleteHandler = (e) => {
         e.preventDefault()
-        let id = parseInt(e.target.closest('.lws-bookedTable').id)
         return dispatch(deleteBooking(id))
     }
 
     return (
-        <tr className="lws-bookedTable text-black" id={id}>
+        <tr className="lws-bookedTable text-black">
             <td className="px-6 py-4">
                 <div className="flex items-center space-x-3">
                     <p className="lws-bookedFrom">{ from}</p>
@@ -23,7 +25,7 @@ function Tr({from,to,date,guests,ticketClass,id}) {
                 <p className="lws-bookedTo">{to}</p>
             </td>
             <td className="px-6 py-4 text-center">
-                <p className="lws-bookedDate">{date}</p>
+                <p className="lws-bookedDate">{formattedDate}</p>
             </td>
             <td className="px-6 py-4 text-center">
                 <p className="lws-bookedGustes">{ guests}</p>
@@ -46,4 +48,4 @@ function Tr({from,to,date,guests,ticketClass,id}) {
     );
 }
 
-export default Tr
+export default Row

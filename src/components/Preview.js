@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Tr from './Tr';
+import Row from './Row';
 
 export default function Preview() {
-    const state = useSelector(state => state);
+    const state = useSelector(state => state.bookingReducer);
     return (
-        <div className="table-container">
+        <div className={`table-container ${state.length>0?'':'hidden'}`}>
             <table className="booking-table">
                 <thead className="bg-gray-100/50">
                     <tr className="text-black text-left">
@@ -18,14 +18,7 @@ export default function Preview() {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-300/20" id="lws-previewBooked">
-                    {state.map((v, i) =>
-                        <Tr key={i}
-                            from={v.from}
-                            to={v.to}
-                            guests={v.guests}
-                            date={v.date}
-                            ticketClass={v.ticketClass}
-                            id={v.id} />)}
+                    {state.map((data) => <Row key={data.id} data={data} />)}
                 </tbody>
             </table>
         </div>
