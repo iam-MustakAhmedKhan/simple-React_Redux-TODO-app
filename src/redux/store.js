@@ -1,6 +1,7 @@
 import { legacy_createStore as createStore } from "redux";
-import combineReducer from "./rootStore";
+import bookingReducer from "./Booking/bookingReducer";
 
-const store = createStore(combineReducer);
+const store = createStore(bookingReducer);
+
 
 export default store
