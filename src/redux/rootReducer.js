@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import bookingReducer from "./Booking/bookingReducer";
-import formReducer from "./formField/formReducer";
+import filterReducer from "./filter/filterReducer";
+import todoReducer from "./todos/todosReducer";
 
-const rootReducers = combineReducers({
-    formField: formReducer,
-    bookingReducer:bookingReducer
+const rootReducer = combineReducers({
+    todos: todoReducer,
+    filter:filterReducer
 });
 
-export default rootReducers
+export default rootReducer
